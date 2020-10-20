@@ -1,0 +1,36 @@
+{
+    "name": "jsramverk-project-api",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+        "start": "nodemon server.js",
+        "production": "NODE_ENV='production' node server.js",
+        "test": "echo \"Error: no test specified\" && exit 0",
+        "posttest": "npm run eslint",
+        "eslint": "eslint ."
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Toddez/jsramverk-project-api.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Toddez/jsramverk-project-api/issues"
+    },
+    "homepage": "https://github.com/Toddez/jsramverk-project-api#readme",
+    "devDependencies": {
+        "eslint": "^7.11.0",
+        "nodemon": "^2.0.5"
+    },
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "jsonwebtoken": "^8.5.1",
+        "mongodb": "^3.6.2",
+        "morgan": "^1.10.0"
+    }
+}
