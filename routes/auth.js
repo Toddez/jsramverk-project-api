@@ -96,7 +96,9 @@ router.post('/auth/register', (req, res, next) => {
     bcrypt.hash(password, saltrounds, (_, hash) => {
         collection.insertOne({
             email: email,
-            password: hash
+            password: hash,
+            balance: 0,
+            inventory: []
         }, (err) => {
             if (err)
                 return next(new Error('Email is already taken'));
