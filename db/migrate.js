@@ -9,17 +9,17 @@ const db = require('./database.js');
     const stocks = db.client().db('project').collection('stocks');
     stocks.insertMany([
         {
-            id: 1,
             name: 'AMD',
             value: [
                 100,
                 101,
                 100,
-                99
+                99,
+                100,
+                101
             ]
         },
         {
-            id: 2,
             name: 'Intel',
             value: [
                 100,
