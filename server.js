@@ -23,9 +23,12 @@ app.use(bodyParser.urlencoded({ extended:  true })); // application/x-www-form-u
 // Import routes
 const auth = require('./routes/auth');
 const transaction = require('./routes/transaction');
+const stocks = require('./routes/stocks');
 
 // Use routes
 app.use('/', auth);
+app.use('/transaction', transaction);
+app.use('/stocks', stocks);
 
 // If no route found
 app.use((req, res, next) => {
