@@ -8,7 +8,8 @@
         "production": "NODE_ENV='production' node server.js",
         "test": "echo \"Error: no test specified\" && exit 0",
         "posttest": "npm run eslint",
-        "eslint": "eslint ."
+        "eslint": "eslint .",
+        "migrate": "node db/migrate.js"
     },
     "repository": {
         "type": "git",
