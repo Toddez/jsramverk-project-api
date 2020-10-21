@@ -10,8 +10,6 @@ const jwtSecret = process.env.JWT_SECRET || 'No-secret';
 const checkToken = (req, res, next) => {
     const token = req.headers['x-access-token'];
 
-    console.log('CHECKING TOKEN');
-
     jwt.verify(token, jwtSecret, (err, payload) => {
         if (err) {
             let err = new Error('Invalid token');
@@ -19,7 +17,7 @@ const checkToken = (req, res, next) => {
             return next(err);
         }
 
-        console.log('PAYLOAD:', payload);
+        req.user = payload;
 
         next();
     });
@@ -58,12 +56,13 @@ router.post('/auth/login', (req, res, next) => {
 
         bcrypt.compare(password, user.password, (_, result) => {
             if (result) {
-                let payload = { message: 'Logged in!', email: user.email };
+                let payload = { email: user.email };
                 let jwtToken = jwt.sign(payload, jwtSecret, { expiresIn: '24h' });
 
                 return res.status(200).json({
                     data: {
-                        payload,
+                        message: 'Logged in!',
+                        email: user.email,
                         token: jwtToken
                     }
                 });
