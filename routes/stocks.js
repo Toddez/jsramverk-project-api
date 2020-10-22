@@ -16,7 +16,6 @@ router.get('/', (req, res, next) => {
             return {
                 id: stock._id,
                 name: stock.name,
-                value: stock.value,
                 current: stock.value[stock.value.length - 1]
             };
         });
