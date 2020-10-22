@@ -11,21 +11,13 @@ const db = require('./database.js');
         {
             name: 'AMD',
             value: [
-                100,
-                101,
-                100,
-                99,
-                100,
-                101
+                { date: '2020-10-22T11:22:04.281Z', value: 100 }
             ]
         },
         {
             name: 'Intel',
             value: [
-                100,
-                99,
-                98,
-                99
+                { date: '2020-10-22T11:22:04.281Z', value: 100 }
             ]
         }
     ], (err) => {
