@@ -31,13 +31,13 @@ router.post('/auth/login', (req, res, next) => {
     const password = req.body.password;
 
     if (!email) {
-        let err = new Error('No email');
+        let err = new Error('Saknar email');
         err.status = 401;
         return next(err);
     }
 
     if (!password) {
-        let err = new Error('No password');
+        let err = new Error('Saknar lösenord');
         err.status = 401;
         return next(err);
     }
@@ -46,10 +46,10 @@ router.post('/auth/login', (req, res, next) => {
 
     collection.findOne({ email: email }, (err, user) => {
         if (err)
-            return next(new Error('Database error'));
+            return next(new Error('Databas fel'));
 
         if (!user) {
-            let err = new Error('User not found');
+            let err = new Error('Användare hittades inte');
             err.status = 401;
             return next(err);
         }
@@ -68,7 +68,7 @@ router.post('/auth/login', (req, res, next) => {
                 });
             }
 
-            let err = new Error('Wrong password');
+            let err = new Error('Fel lösenord');
             err.status = 401;
             return next(err);
         });
@@ -80,13 +80,13 @@ router.post('/auth/register', (req, res, next) => {
     const password = req.body.password;
 
     if (!email) {
-        let err = new Error('No email');
+        let err = new Error('Saknar email');
         err.status = 401;
         return next(err);
     }
 
     if (!password) {
-        let err = new Error('No password');
+        let err = new Error('Saknar lösenord');
         err.status = 401;
         return next(err);
     }
@@ -101,7 +101,7 @@ router.post('/auth/register', (req, res, next) => {
             inventory: []
         }, (err) => {
             if (err)
-                return next(new Error('Email is already taken'));
+                return next(new Error('Email är redan tagen'));
 
             res.status(201).json({
                 data: {

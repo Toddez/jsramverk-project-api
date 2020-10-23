@@ -9,7 +9,7 @@ router.get('/', (req, res, next) => {
 
     collection.find().toArray((err, stocks) => {
         if (err) {
-            return next(new Error('Database error'));
+            return next(new Error('Databas fel'));
         }
 
         let data = stocks.map((stock) => {
@@ -31,7 +31,7 @@ router.get('/:id', (req, res, next) => {
 
     collection.findOne({ _id: new ObjectId(req.params.id) }, (err, stock) => {
         if (err) {
-            return next(new Error('Database error'));
+            return next(new Error('Databas fel'));
         }
 
         let data = {

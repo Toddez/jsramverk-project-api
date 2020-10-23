@@ -10,13 +10,13 @@ router.get('/inventory', (req, res, next) => {
 
     users.findOne({email: req.user.email}, (err, user) => {
         if (err) {
-            return next(new Error('Database error'));
+            return next(new Error('Databas fel'));
         }
 
         stocksCollection.find({}).toArray((err, stocks) => {
             if (err) {
                 console.log(err);
-                return next(new Error('Database error'));
+                return next(new Error('Databas fel'));
             }
 
             let inventoryData = [];
@@ -53,23 +53,23 @@ router.post('/buy', (req, res, next) => {
     const stocks = db.client().db('project').collection('stocks');
 
     if (req.body.amount <= 0 || !Number.isInteger(parseFloat(req.body.amount))) {
-        return next(new Error('Amount must be a positive integer'));
+        return next(new Error('Mängd måste vara ett positivt heltal'));
     }
 
     users.findOne({email: req.user.email}, (err, user) => {
         if (err) {
-            return next(new Error('Database error'));
+            return next(new Error('Databas fel'));
         }
 
         stocks.findOne({_id: ObjectId(req.body.id)}, (err, stock) => {
             if (err) {
-                return next(new Error('Database error'));
+                return next(new Error('Databas fel'));
             }
 
             const stockValue = stock.value[stock.value.length - 1].value;
 
             if (stockValue * req.body.amount > user.balance) {
-                return next(new Error('Not enough balance'));
+                return next(new Error('Inte tillräckligt med pengar på konto'));
             }
 
             let currentAmount = 0;
@@ -91,7 +91,7 @@ router.post('/buy', (req, res, next) => {
                 }
             }, (err) => {
                 if (err) {
-                    return next(new Error('Database error'));
+                    return next(new Error('Databas fel'));
                 }
 
                 res.status(201).json({
@@ -110,17 +110,17 @@ router.post('/sell', (req, res, next) => {
     const stocks = db.client().db('project').collection('stocks');
 
     if (req.body.amount <= 0 || !Number.isInteger(parseFloat(req.body.amount))) {
-        return next(new Error('Amount must be a positive integer'));
+        return next(new Error('Mängd måste vara ett positivt heltal'));
     }
 
     users.findOne({email: req.user.email}, (err, user) => {
         if (err) {
-            return next(new Error('Database error'));
+            return next(new Error('Databas fel'));
         }
 
         stocks.findOne({_id: ObjectId(req.body.id)}, (err, stock) => {
             if (err) {
-                return next(new Error('Database error'));
+                return next(new Error('Databas fel'));
             }
 
             const stockValue = stock.value[stock.value.length - 1].value;
@@ -131,7 +131,7 @@ router.post('/sell', (req, res, next) => {
             }
 
             if (currentAmount < req.body.amount ) {
-                return next(new Error('Not enough stocks'));
+                return next(new Error('Inte tillräckligt med andelar'));
             }
 
             const newBalance = user.balance + stockValue * req.body.amount;
@@ -148,7 +148,7 @@ router.post('/sell', (req, res, next) => {
                 }
             }, (err) => {
                 if (err) {
-                    return next(new Error('Database error'));
+                    return next(new Error('Databas fel'));
                 }
 
                 res.status(201).json({
@@ -179,7 +179,7 @@ router.post('/deposit', (req, res, next) => {
         {new: true},
         (err, result) => {
             if (err) {
-                return next(new Error('Database error'));
+                return next(new Error('Databas fel'));
             }
 
             const user = result.value;

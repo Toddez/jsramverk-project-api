@@ -25,7 +25,7 @@ class Database {
 
     static client() {
         if (!Database.mongoClient)
-            throw new Error('Database not running');
+            throw new Error('Databasen körs inte');
 
         return Database.mongoClient;
     }
