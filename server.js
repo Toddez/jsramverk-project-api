@@ -7,14 +7,17 @@ require('dotenv').config();
 
 const app = express();
 
-require('./db/database.js').Database.connect();
 const port = process.env.HTTP_PORT || 1337;
 
 app.use(cors());
 
-// Log unless running tests
-if (process.env.NODE_ENV !== 'test')
+if (process.env.NODE_ENV !== 'test') {
+    // Log unless running tests
     app.use(morgan('combined'));
+
+    // Connect to db unless running tests
+    require('./db/database.js').Database.connect();
+}
 
 // Bodyparser
 app.use(bodyParser.json()); // application/json
