@@ -1,7 +1,7 @@
 const { Database, db } = require('./database.js');
 
 (async () => {
-    await db.connect();
+    await Database.connect();
 
     // DROP Datbase
     Database.client().db(db).dropDatabase();
