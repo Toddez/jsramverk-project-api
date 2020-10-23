@@ -6,7 +6,8 @@
     "scripts": {
         "start": "nodemon server.js",
         "production": "NODE_ENV='production' node server.js",
-        "test": "echo \"Error: no test specified\" && exit 0",
+        "pretest": "NODE_ENV='test' node db/migrate.js",
+        "test": "NODE_ENV='test' nyc --reporter=html --reporter=text --reporter=clover mocha --timeout 10000",
         "posttest": "npm run eslint",
         "eslint": "eslint .",
         "migrate": "node db/migrate.js"
