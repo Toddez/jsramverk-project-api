@@ -93,20 +93,26 @@ router.post('/auth/register', (req, res, next) => {
 
     const collection = Database.client().db(db).collection('users');
 
-    bcrypt.hash(password, saltrounds, (_, hash) => {
-        collection.insertOne({
-            email: email,
-            password: hash,
-            balance: 0,
-            inventory: []
-        }, (err) => {
-            if (err)
-                return next(new Error('Email är redan tagen'));
+    collection.countDocuments({ email: email }, (err, count) => {
+        if (count > 0) {
+            return next(new Error('Email är redan tagen'));
+        }
 
-            res.status(201).json({
-                data: {
-                    message: 'User registered'
-                }
+        bcrypt.hash(password, saltrounds, (_, hash) => {
+            collection.insertOne({
+                email: email,
+                password: hash,
+                balance: 0,
+                inventory: []
+            }, (err) => {
+                if (err)
+                    return next(new Error('Databas fel'));
+
+                res.status(201).json({
+                    data: {
+                        message: 'User registered'
+                    }
+                });
             });
         });
     });
