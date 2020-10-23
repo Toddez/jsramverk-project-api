@@ -22,8 +22,13 @@
     },
     "homepage": "https://github.com/Toddez/jsramverk-project-api#readme",
     "devDependencies": {
+        "chai": "^4.2.0",
+        "chai-http": "^4.3.0",
         "eslint": "^7.11.0",
-        "nodemon": "^2.0.5"
+        "mocha": "^8.2.0",
+        "node-fetch": "^2.6.1",
+        "nodemon": "^2.0.5",
+        "nyc": "^15.1.0"
     },
     "dependencies": {
         "bcryptjs": "^2.4.3",
