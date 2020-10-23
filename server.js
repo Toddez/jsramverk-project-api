@@ -7,7 +7,7 @@ require('dotenv').config();
 
 const app = express();
 
-require('./db/database.js').connect();
+require('./db/database.js').Database.connect();
 const port = process.env.HTTP_PORT || 1337;
 
 app.use(cors());

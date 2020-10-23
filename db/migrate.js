@@ -1,12 +1,12 @@
-const db = require('./database.js');
+const { Database, db } = require('./database.js');
 
 (async () => {
     await db.connect();
 
     // DROP Datbase
-    db.client().db('project').dropDatabase();
+    Database.client().db(db).dropDatabase();
 
-    const stocks = db.client().db('project').collection('stocks');
+    const stocks = Database.client().db(db).collection('stocks');
     stocks.insertMany([
         {
             name: 'AMD',

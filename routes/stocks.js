@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const db = require('../db/database.js');
+const { Database, db } = require('../db/database.js');
 const ObjectId = require('mongodb').ObjectID;
 
 router.get('/', (req, res, next) => {
-    const collection = db.client().db('project').collection('stocks');
+    const collection = Database.client().db(db).collection('stocks');
 
     collection.find().toArray((err, stocks) => {
         if (err) {
@@ -27,7 +27,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/:id', (req, res, next) => {
-    const collection = db.client().db('project').collection('stocks');
+    const collection = Database.client().db(db).collection('stocks');
 
     collection.findOne({ _id: new ObjectId(req.params.id) }, (err, stock) => {
         if (err) {

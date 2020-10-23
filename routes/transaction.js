@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const db = require('../db/database.js');
+const { Database, db } = require('../db/database.js');
 const ObjectId = require('mongodb').ObjectID;
 
 router.get('/inventory', (req, res, next) => {
-    const users = db.client().db('project').collection('users');
-    const stocksCollection = db.client().db('project').collection('stocks');
+    const users = Database.client().db(db).collection('users');
+    const stocksCollection = Database.client().db(db).collection('stocks');
 
     users.findOne({email: req.user.email}, (err, user) => {
         if (err) {
@@ -49,8 +49,8 @@ router.get('/inventory', (req, res, next) => {
 });
 
 router.post('/buy', (req, res, next) => {
-    const users = db.client().db('project').collection('users');
-    const stocks = db.client().db('project').collection('stocks');
+    const users = Database.client().db(db).collection('users');
+    const stocks = Database.client().db(db).collection('stocks');
 
     if (req.body.amount <= 0 || !Number.isInteger(parseFloat(req.body.amount))) {
         return next(new Error('Mängd måste vara ett positivt heltal'));
@@ -106,8 +106,8 @@ router.post('/buy', (req, res, next) => {
 });
 
 router.post('/sell', (req, res, next) => {
-    const users = db.client().db('project').collection('users');
-    const stocks = db.client().db('project').collection('stocks');
+    const users = Database.client().db(db).collection('users');
+    const stocks = Database.client().db(db).collection('stocks');
 
     if (req.body.amount <= 0 || !Number.isInteger(parseFloat(req.body.amount))) {
         return next(new Error('Mängd måste vara ett positivt heltal'));
@@ -163,7 +163,7 @@ router.post('/sell', (req, res, next) => {
 });
 
 router.post('/deposit', (req, res, next) => {
-    const collection = db.client().db('project').collection('users');
+    const collection = Database.client().db(db).collection('users');
 
     const increment = parseInt(req.body.amount);
 

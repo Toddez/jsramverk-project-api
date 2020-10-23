@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const db = require('../db/database.js');
+const { Database, db } = require('../db/database.js');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const saltrounds = 10;
@@ -42,7 +42,7 @@ router.post('/auth/login', (req, res, next) => {
         return next(err);
     }
 
-    const collection = db.client().db('project').collection('users');
+    const collection = Database.client().db(db).collection('users');
 
     collection.findOne({ email: email }, (err, user) => {
         if (err)
@@ -91,7 +91,7 @@ router.post('/auth/register', (req, res, next) => {
         return next(err);
     }
 
-    const collection = db.client().db('project').collection('users');
+    const collection = Database.client().db(db).collection('users');
 
     bcrypt.hash(password, saltrounds, (_, hash) => {
         collection.insertOne({

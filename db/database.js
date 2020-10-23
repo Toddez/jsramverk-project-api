@@ -31,4 +31,9 @@ class Database {
     }
 }
 
-module.exports = Database;
+let db = 'project';
+if (process.env.NODE_ENV === 'test') {
+    db = 'project-test';
+}
+
+module.exports = { Database, db };
