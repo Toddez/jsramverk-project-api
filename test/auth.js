@@ -13,7 +13,7 @@ const { Database } = require('../db/database.js');
 let client;
 
 describe('auth', () => {
-    describe('POST /register', () => {
+    describe('POST /auth/register', () => {
         it('should register user', (done) => {
             chai.request(server)
                 .post('/auth/register')
@@ -42,7 +42,7 @@ describe('auth', () => {
         });
     });
 
-    describe('POST /login', () => {
+    describe('POST /auth/login', () => {
         it('should login user with correct details', (done) => {
             chai.request(server)
                 .post('/auth/login')
