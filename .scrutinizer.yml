@@ -1,6 +1,8 @@
 build:
   nodes:
     coverage:
+      services:
+        mongo: 4
       tests:
         override:
           - command: npm test
