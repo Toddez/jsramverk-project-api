@@ -1,7 +1,7 @@
 # jsramverk-project-api
 
-[![Code Coverage](https://scrutinizer-ci.com/g/Toddez/jsramverk-project-api/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/Toddez/jsramverk-project-api/?branch=main)
 [![Build Status](https://scrutinizer-ci.com/g/Toddez/jsramverk-project-api/badges/build.png?b=main)](https://scrutinizer-ci.com/g/Toddez/jsramverk-project-api/build-status/main)
+[![Code Coverage](https://scrutinizer-ci.com/g/Toddez/jsramverk-project-api/badges/coverage.png?b=main)](https://scrutinizer-ci.com/g/Toddez/jsramverk-project-api/?branch=main)
 
 ## Val av teknik
 - Express  
